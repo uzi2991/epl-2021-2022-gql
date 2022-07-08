@@ -16,6 +16,7 @@ import { StandingsModule } from './standings/standings.module';
       sortSchema: true,
       playground: true,
       introspection: true,
+      path: "/"
     }),
     RoundsModule,
     ResolveModule,
