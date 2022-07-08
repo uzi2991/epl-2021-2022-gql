@@ -70,7 +70,7 @@ type StandingsEntry {
 }
 
 type Team {
-  matches: [Match!]!
+  matches(filter: MatchesInput): [Match!]!
   name: String!
   standingsEntries: [StandingsEntry!]!
 }

@@ -1,6 +1,7 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { Team } from './models/team.model';
 import { ResolveService } from '../resolve/resolve.service';
+import { MatchesInput } from '../matches/dtos/matches.input';
 
 @Resolver((of) => Team)
 export class TeamsResolver {
@@ -17,8 +18,11 @@ export class TeamsResolver {
   }
 
   @ResolveField()
-  matches(@Parent() parent: Team) {
-    return this.resolveService.getMatchesOfTeams(parent.name);
+  matches(
+    @Parent() parent: Team,
+    @Args('filter', { nullable: true }) filter?: MatchesInput,
+  ) {
+    return this.resolveService.getMatchesOfTeams(parent.name, filter);
   }
 
   @ResolveField()

@@ -23,15 +23,16 @@ export class ResolveService {
     return this.teamsRepo.find();
   }
 
-  getMatchesOfTeams(teamName: string) {
+  getMatchesOfTeams(teamName: string, filter?: MatchesInput) {
     const team = this.getTeam(teamName);
 
     if (!team) {
       return [];
     }
 
-    return team.matchNumbers.map((matchNumber) =>
-      this.matchesRepo.findOne(matchNumber),
+    return this.matchesRepo.filterMatches(
+      team.matchNumbers.map((matchNumber) => this.getMatch(matchNumber)),
+      filter,
     );
   }
 
