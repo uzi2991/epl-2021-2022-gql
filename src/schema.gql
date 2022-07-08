@@ -1,0 +1,68 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Match {
+  awayTeam: String!
+  date: String!
+  homeTeam: String!
+  location: String!
+  matchNumber: Int!
+  result: MatchResult!
+  round: Round!
+}
+
+type MatchResult {
+  away: Int!
+  goalDiff: Int!
+  home: Int!
+  type: ResultType!
+}
+
+input MatchesInput {
+  awayTeam: String
+  goalDiff: Int
+  homeTeam: String
+  resultType: ResultType
+  roundNumber: Int
+  team: String
+}
+
+input MatchesOnRoundInput {
+  awayTeam: String
+  goalDiff: Int
+  homeTeam: String
+  resultType: ResultType
+  team: String
+}
+
+type Query {
+  match(matchNumber: Int!): Match
+  matches(filter: MatchesInput): [Match!]!
+  round(roundNumber: Int!): Round
+  rounds: [Round!]!
+}
+
+enum ResultType {
+  AWAY_WIN
+  DRAW
+  HOME_WIN
+}
+
+type Round {
+  matches(filter: MatchesOnRoundInput): [Match!]!
+  roundNumber: Int!
+  standings: [StandingsEntry!]!
+}
+
+type StandingsEntry {
+  gamesDrawn: Int!
+  gamesLost: Int!
+  gamesWon: Int!
+  goalDiff: Int!
+  goalsConceded: Int!
+  goalsScored: Int!
+  points: Int!
+  position: Int!
+  team: String!
+}
