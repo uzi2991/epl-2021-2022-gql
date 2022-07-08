@@ -13,7 +13,14 @@ export class StandingsRepository {
     console.log('Standings Repo init successfully');
   }
 
-  findOne(roundNumber: number) {
+  getStandingsOnRound(roundNumber: number) {
     return this.standings[roundNumber];
+  }
+
+  findOne(id: string) {
+    const [roundNumber, pos] = id.split('/');
+    return this.standings[parseInt(roundNumber)].find(
+      (entry) => entry.position === parseInt(pos),
+    );
   }
 }

@@ -3,9 +3,9 @@
 # ------------------------------------------------------
 
 type Match {
-  awayTeam: String!
+  awayTeam: Team!
   date: String!
-  homeTeam: String!
+  homeTeam: Team!
   location: String!
   matchNumber: Int!
   result: MatchResult!
@@ -41,6 +41,8 @@ type Query {
   matches(filter: MatchesInput): [Match!]!
   round(roundNumber: Int!): Round
   rounds: [Round!]!
+  team(teamName: String!): Team
+  teams: [Team!]!
 }
 
 enum ResultType {
@@ -64,5 +66,11 @@ type StandingsEntry {
   goalsScored: Int!
   points: Int!
   position: Int!
-  team: String!
+  team: Team!
+}
+
+type Team {
+  matches: [Match!]!
+  name: String!
+  standingsEntries: [StandingsEntry!]!
 }

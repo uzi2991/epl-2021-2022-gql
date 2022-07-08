@@ -7,21 +7,21 @@ import {
   Int,
 } from '@nestjs/graphql';
 import { Round } from './models/round.model';
-import { RoundsService } from './rounds.service';
 import { MatchesOnRoundInput } from './dtos/matches-on-round.input';
+import { ResolveService } from '../resolve/resolve.service';
 
 @Resolver((of) => Round)
 export class RoundsResolver {
-  constructor(private readonly roundsService: RoundsService) {}
+  constructor(private readonly resolveService: ResolveService) {}
 
   @Query((returns) => [Round])
   rounds() {
-    return this.roundsService.find();
+    return this.resolveService.getRounds();
   }
 
   @Query((returns) => Round, { nullable: true })
   round(@Args('roundNumber', { type: () => Int }) roundNumber: number) {
-    return this.roundsService.findOne(roundNumber);
+    return this.resolveService.getRound(roundNumber);
   }
 
   @ResolveField()
@@ -30,11 +30,11 @@ export class RoundsResolver {
     @Args('filter', { nullable: true })
     filter?: MatchesOnRoundInput,
   ) {
-    return this.roundsService.getMatchesOnRound(parent.roundNumber, filter);
+    return this.resolveService.getMatchesOnRound(parent.roundNumber, filter);
   }
 
   @ResolveField()
   standings(@Parent() parent: Round) {
-    return this.roundsService.getRoundStandings(parent.roundNumber);
+    return this.resolveService.getRoundStandings(parent.roundNumber);
   }
 }

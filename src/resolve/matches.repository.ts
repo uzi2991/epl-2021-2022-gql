@@ -6,9 +6,9 @@ import { FilterFunctions } from 'src/common/type';
 import { MatchResult, ResultType } from 'src/matches/models/match-result.model';
 
 const matchesFilterFuncs: FilterFunctions<MatchesInput, Match> = {
-  team: (match, input) => match.awayTeam === input || match.homeTeam === input,
-  homeTeam: (match, input) => match.homeTeam === input,
-  awayTeam: (match, input) => match.awayTeam === input,
+  team: (match, input) => match.awayTeamName === input || match.homeTeamName === input,
+  homeTeam: (match, input) => match.homeTeamName === input,
+  awayTeam: (match, input) => match.awayTeamName === input,
   resultType: (match, input) => match.result.type === input,
   goalDiff: (match, input) => match.result.goalDiff === input,
   roundNumber: (match, input) => match.roundNumber === input,

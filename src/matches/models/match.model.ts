@@ -1,6 +1,7 @@
 import { Field, ObjectType, Int } from '@nestjs/graphql';
 import { MatchResult } from './match-result.model';
 import { Round } from '../../rounds/models/round.model';
+import { Team } from '../../teams/models/team.model';
 
 @ObjectType()
 export class Match {
@@ -19,10 +20,14 @@ export class Match {
   location: string;
 
   @Field()
-  homeTeam: string;
+  homeTeam: Team;
+
+  homeTeamName: string;
 
   @Field()
-  awayTeam: string;
+  awayTeam: Team;
+
+  awayTeamName: string;
 
   @Field((type) => MatchResult)
   result: MatchResult;

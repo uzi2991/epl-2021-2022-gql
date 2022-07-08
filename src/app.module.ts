@@ -6,6 +6,7 @@ import { MatchesModule } from './matches/matches.module';
 import { RoundsModule } from './rounds/rounds.module';
 import { ResolveModule } from './resolve/resolve.module';
 import { StandingsModule } from './standings/standings.module';
+import { TeamsModule } from './teams/teams.module';
 
 @Module({
   imports: [
@@ -16,11 +17,13 @@ import { StandingsModule } from './standings/standings.module';
       sortSchema: true,
       playground: true,
       introspection: true,
-      path: "/"
+      path: "/",
+      
     }),
     RoundsModule,
     ResolveModule,
     StandingsModule,
+    TeamsModule,
   ],
 })
 export class AppModule {}

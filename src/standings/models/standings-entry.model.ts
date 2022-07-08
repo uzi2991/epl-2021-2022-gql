@@ -1,14 +1,19 @@
 import { Field, ObjectType, Int } from '@nestjs/graphql';
+import { Team } from '../../teams/models/team.model';
 
 @ObjectType()
 export class StandingsEntry {
   id: string;
 
+  teamName: string;
+
+  roundNumber: number;
+
   @Field((type) => Int)
   position: number;
 
-  @Field()
-  team: string;
+  @Field((type) => Team)
+  team: Team;
 
   @Field((type) => Int)
   gamesWon: number;
