@@ -6,10 +6,11 @@
 query {
   round(roundNumber: 38) {
     standings {
+      team {
+        name
+      }
       position
-      team
       points
-      goalDiff
     }
   }
 }
